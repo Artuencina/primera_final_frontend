@@ -38,7 +38,6 @@ class _CategoriasScreenState extends ConsumerState<CategoriasScreen> {
     );
   }
 
-
   //Metodo para agregar una categoria
   void _showModalCategoria(Categoria? editCategoria) {
     //Controller para manejar el texto del input
@@ -134,17 +133,17 @@ class _CategoriasScreenState extends ConsumerState<CategoriasScreen> {
       ),
       drawer: const SideBar(),
       body: categorias.isEmpty
-          ? Center(
+          ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.category_outlined,
                     size: 100,
-                    color: widget.color,
+                    color: Colors.grey,
                   ),
-                  const SizedBox(height: 10),
-                  const Text("No hay categorías"),
+                  SizedBox(height: 10),
+                  Text("No hay categorías"),
                 ],
               ),
             )

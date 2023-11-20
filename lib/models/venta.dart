@@ -1,10 +1,13 @@
 //Modelo de venta
+import 'package:registro_productos/models/cliente.dart';
+import 'package:registro_productos/models/producto.dart';
 import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();
 
 class Venta {
   String id;
+  Cliente cliente;
   String numeroFactura;
   DateTime fecha;
   List<VentaDetalle> ventaDetalle;
@@ -13,18 +16,16 @@ class Venta {
   Venta(
       {required this.numeroFactura,
       required this.fecha,
+      required this.cliente,
       required this.ventaDetalle,
       required this.total})
       : id = uuid.v4();
 }
 
 class VentaDetalle {
-  String idVenta;
-  String idProducto;
+  String? idVenta;
+  Producto producto;
   int cantidad;
 
-  VentaDetalle(
-      {required this.idVenta,
-      required this.idProducto,
-      required this.cantidad});
+  VentaDetalle({this.idVenta, required this.producto, required this.cantidad});
 }

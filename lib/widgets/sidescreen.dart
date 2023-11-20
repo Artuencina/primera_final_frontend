@@ -13,7 +13,7 @@ class SideBar extends StatelessWidget {
           DrawerHeader(
             padding: EdgeInsets.zero,
             child: Container(
-              color: Colors.blue,
+              color: Colors.indigo,
               child: Center(
                 child: Text('Registro de productos',
                     textAlign: TextAlign.center,

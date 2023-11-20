@@ -28,17 +28,17 @@ class ProductosScreen extends ConsumerWidget {
       ),
       drawer: const SideBar(),
       body: productos.isEmpty
-          ? Center(
+          ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.shopping_basket,
                     size: 100,
-                    color: color,
+                    color: Colors.grey,
                   ),
-                  const SizedBox(height: 10),
-                  const Text("No hay productos"),
+                  SizedBox(height: 10),
+                  Text("No hay productos"),
                 ],
               ),
             )
@@ -49,7 +49,9 @@ class ProductosScreen extends ConsumerWidget {
                   producto: productos[index],
                   categorias: categorias,
                   onDelete: (producto) {
-                    ref.read(productosProvider.notifier).removeProducto(producto);
+                    ref
+                        .read(productosProvider.notifier)
+                        .removeProducto(producto);
                   },
                 );
               },
@@ -127,7 +129,9 @@ class ProductosScreen extends ConsumerWidget {
                     precio: double.parse(precioController.text),
                   );
 
-                  ref.read(productosProvider.notifier).addProducto(nuevoProducto);
+                  ref
+                      .read(productosProvider.notifier)
+                      .addProducto(nuevoProducto);
 
                   Navigator.of(context).pop(); // Cerrar modal
 

@@ -105,9 +105,7 @@ class _ClienteScreenState extends ConsumerState<ClientesScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(editCliente != null
-                ? "Editar cliente"
-                : "Agregar cliente"),
+            Text(editCliente != null ? "Editar cliente" : "Agregar cliente"),
             const SizedBox(height: 20),
             TextField(
               controller: nombreController,
@@ -196,17 +194,13 @@ class _ClienteScreenState extends ConsumerState<ClientesScreen> {
       ),
       drawer: const SideBar(),
       body: clientes.isEmpty
-          ? Center(
+          ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.people,
-                    size: 100,
-                    color: widget.color
-                  ),
-                  const SizedBox(height: 10),
-                  const Text("No hay clientes"),
+                  Icon(Icons.people, size: 100, color: Colors.grey),
+                  SizedBox(height: 10),
+                  Text("No hay clientes"),
                 ],
               ),
             )
