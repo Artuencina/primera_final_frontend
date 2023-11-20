@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:registro_productos/pages/categorias_screen.dart';
 import 'package:registro_productos/pages/cliente_detalle_screen.dart';
 import 'package:registro_productos/pages/clientes_screen.dart';
@@ -60,5 +61,5 @@ final routes = {
   '/productos': (context) => const ProductosScreen(),
   '/productos/:id': (context) =>
       ProductoDetalleScreen(idProducto: context.parameters['id']!),
-  '/categorias': (context) => const CategoriasScreen(),
+  '/categorias': (context) => const CategoriasScreen(color: Colors.indigo),
 };

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:registro_productos/routes.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Tema principal
 final kTheme = ThemeData(
@@ -17,11 +18,16 @@ final kTheme = ThemeData(
 );
 
 void main() {
-  runApp(MaterialApp(
-    theme: kTheme,
-    initialRoute: '/ventas',
-    title: 'Registro de Productos',
-    themeMode: ThemeMode.light,
-    routes: routes,
-  ));
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    ProviderScope(
+      child: MaterialApp(
+        theme: kTheme,
+        initialRoute: '/ventas',
+        title: 'Registro de Productos',
+        themeMode: ThemeMode.light,
+        routes: routes,
+      ),
+    ),
+  );
 }
