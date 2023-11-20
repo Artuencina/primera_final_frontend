@@ -52,7 +52,7 @@ import 'package:registro_productos/pages/ventas_screen.dart';
 //Para poder usar el pushNamed
 
 final routes = {
-  '/ventas': (context) => const VentasScreen(),
+  '/ventas': (context) => const VentasScreen(color: Colors.indigo),
   '/ventas/:id': (context) =>
       VentaDetalleScreen(idVenta: context.parameters['id']!),
   '/clientes': (context) => const ClientesScreen(color: Colors.indigo),

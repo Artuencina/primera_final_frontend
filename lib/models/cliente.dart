@@ -13,4 +13,8 @@ class Cliente {
 
   Cliente({required this.nombre, required this.apellido, this.ruc, this.email})
       : id = uuid.v4();
+
+  static Cliente? getClientById(List<Cliente> clientes, String id) {
+    return clientes.firstWhere((cliente) => cliente.id == id);
+  }
 }
