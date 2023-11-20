@@ -17,10 +17,11 @@ final kTheme = ThemeData(
 );
 
 void main() {
-  runApp(MaterialApp.router(
+  runApp(MaterialApp(
     theme: kTheme,
-    routerConfig: router,
+    initialRoute: '/ventas',
     title: 'Registro de Productos',
     themeMode: ThemeMode.light,
+    routes: routes,
   ));
 }
