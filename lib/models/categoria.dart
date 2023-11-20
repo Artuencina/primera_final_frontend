@@ -8,4 +8,8 @@ class Categoria {
   String nombre;
 
   Categoria({required this.nombre}) : id = uuid.v4();
+
+  static Categoria? getCategoriaById(List<Categoria> categorias, String id) {
+    return categorias.firstWhere((categoria) => categoria.id == id);
+  }
 }
