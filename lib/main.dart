@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //Tema principal
 final kTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.indigoAccent,
+    seedColor: Colors.indigo,
     brightness: Brightness.light,
   ),
   appBarTheme: const AppBarTheme(

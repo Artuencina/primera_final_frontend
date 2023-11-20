@@ -58,7 +58,7 @@ final routes = {
   '/clientes': (context) => const ClientesScreen(color: Colors.indigo),
   '/clientes/:id': (context) =>
       ClienteDetalleScreen(idCliente: context.parameters['id']!),
-  '/productos': (context) => const ProductosScreen(),
+  '/productos': (context) => const ProductosScreen(color: Colors.indigo),
   '/productos/:id': (context) =>
       ProductoDetalleScreen(idProducto: context.parameters['id']!),
   '/categorias': (context) => const CategoriasScreen(color: Colors.indigo),
