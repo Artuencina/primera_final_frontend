@@ -1,8 +1,12 @@
 //Vista de ventas
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:registro_productos/models/venta.dart';
+import 'package:registro_productos/provider/pdfexport.dart';
 import 'package:registro_productos/provider/ventas_provider.dart';
 import 'package:registro_productos/widgets/modal_venta.dart';
 import 'package:registro_productos/widgets/sidescreen.dart';
@@ -87,36 +91,69 @@ _buildList(List<Venta> ventas, WidgetRef ref) {
     itemCount: ventas.length,
     itemBuilder: (context, index) {
       final venta = ventas[index];
-      return Dismissible(
-        key: ValueKey(venta.id),
-        background: Container(
-          color: Colors.red,
-          child: const Icon(Icons.delete, color: Colors.white),
-        ),
-        direction: DismissDirection.endToStart,
-        onDismissed: (direction) {
-          //Borrar venta del provider
-          ref.read(ventasProvider.notifier).removeVenta(venta);
+      return InkWell(
+        //Si se hace un longtap
+        onLongPress: () async {
+          //Ver si el cliente de la venta seleccionada tiene un email
+          //Si no tiene, avisa que no puede enviar
+
+          //Solicitar permiso para escribir archivo
+          //Si no se da el permiso, no se puede enviar el email
+
+          if (venta.cliente.email == null || venta.cliente.email!.isEmpty) {
+            //Guardar el pdf en el directorio de la app
+            final file = File('venta.pdf');
+
+            await file.writeAsBytes(makePdf(venta));
+
+            final Email sendEmail = Email(
+                body: 'Se adjunta factura de su venta',
+                subject: 'Venta creada',
+                recipients: [venta.cliente.email!],
+                attachmentPaths: [file.path]);
+
+            await FlutterEmailSender.send(sendEmail);
+          } else {
+            showDialog(
+                context: context,
+                builder: (context) => const AlertDialog(
+                      title: Text('Error'),
+                      content: Text('El cliente no tiene un email'),
+                    ));
+          }
         },
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.black54),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 5,
-                offset: Offset(0, 5),
-              ),
-            ],
+
+        child: Dismissible(
+          key: ValueKey(venta.id),
+          background: Container(
+            color: Colors.red,
+            child: const Icon(Icons.delete, color: Colors.white),
           ),
-          child: ListTile(
-            leading: const Icon(Icons.shopping_cart),
-            title: Text(venta.numeroFactura),
-            subtitle: Text(DateFormat.yMMMd().format(venta.fecha)),
-            trailing: Text(venta.total.toString()),
+          direction: DismissDirection.endToStart,
+          onDismissed: (direction) {
+            //Borrar venta del provider
+            ref.read(ventasProvider.notifier).removeVenta(venta);
+          },
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.black54),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 5,
+                  offset: Offset(0, 5),
+                ),
+              ],
+            ),
+            child: ListTile(
+              leading: const Icon(Icons.shopping_cart),
+              title: Text(venta.numeroFactura),
+              subtitle: Text(DateFormat.yMMMd().format(venta.fecha)),
+              trailing: Text(venta.total.toString()),
+            ),
           ),
         ),
       );
