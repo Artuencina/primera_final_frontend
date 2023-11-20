@@ -1,17 +1,11 @@
 //Vista de ventas
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:registro_productos/models/venta.dart';
 import 'package:registro_productos/provider/ventas_provider.dart';
 import 'package:registro_productos/widgets/modal_venta.dart';
 import 'package:registro_productos/widgets/sidescreen.dart';
-import 'package:registro_productos/models/cliente.dart';
-import 'package:registro_productos/models/venta.dart';
-import 'package:registro_productos/provider/ventas_provider.dart';
-import 'package:registro_productos/provider/clientes_provider.dart';
-import 'package:registro_productos/widgets/venta_item.dart';
 
 class VentasScreen extends ConsumerWidget {
   const VentasScreen({
@@ -23,9 +17,6 @@ class VentasScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ventas = ref.watch(ventasProvider);
-    final clientes = ref.watch(clientesProvider);
-
     return Scaffold(
       appBar: _buildAppbar(context, ref),
       drawer: const SideBar(),

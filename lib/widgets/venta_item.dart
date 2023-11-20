@@ -16,7 +16,7 @@ class VentaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Cliente? cliente = Cliente.getClientById(clientes, venta.idCliente);
+    final Cliente? cliente = Cliente.getClientById(clientes, venta.cliente.id);
 
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
