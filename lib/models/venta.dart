@@ -1,4 +1,3 @@
-//Modelo de venta
 import 'package:registro_productos/models/cliente.dart';
 import 'package:registro_productos/models/producto.dart';
 import 'package:uuid/uuid.dart';
