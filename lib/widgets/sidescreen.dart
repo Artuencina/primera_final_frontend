@@ -1,7 +1,6 @@
 //Sidebar que muestra todas las vistas
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({super.key});
@@ -17,7 +16,10 @@ class SideBar extends StatelessWidget {
               color: Colors.blue,
               child: Center(
                 child: Text('Registro de productos',
-                    style: Theme.of(context).textTheme.headlineMedium),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: Colors.white,
+                        )),
               ),
             ),
           ),
@@ -25,28 +27,28 @@ class SideBar extends StatelessWidget {
             leading: const Icon(Icons.shopping_cart),
             title: const Text('Ventas'),
             onTap: () {
-              context.go('/ventas');
+              Navigator.of(context).pushReplacementNamed('/ventas');
             },
           ),
           ListTile(
             leading: const Icon(Icons.people),
             title: const Text('Clientes'),
             onTap: () {
-              context.go('/clientes');
+              Navigator.pushReplacementNamed(context, '/clientes');
             },
           ),
           ListTile(
             leading: const Icon(Icons.inventory),
             title: const Text('Productos'),
             onTap: () {
-              Navigator.pushNamed(context, '/productos');
+              Navigator.pushReplacementNamed(context, '/productos');
             },
           ),
           ListTile(
             leading: const Icon(Icons.category),
             title: const Text('Categorías'),
             onTap: () {
-              Navigator.pushNamed(context, '/categorias');
+              Navigator.pushReplacementNamed(context, '/categorias');
             },
           )
         ],
