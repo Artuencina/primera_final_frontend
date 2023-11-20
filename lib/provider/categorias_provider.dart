@@ -13,6 +13,17 @@ class CategoriasProvider extends StateNotifier<List<Categoria>> {
   void removeCategoria(Categoria categoria) {
     state = state.where((element) => element != categoria).toList();
   }
+   
+  void insertCategoria(int index, Categoria categoria) {
+    state = [...state.sublist(0, index), categoria, ...state.sublist(index)];
+  }
+
+  void updateCategoria(Categoria categoria) {
+    state = [
+      for (final item in state)
+        if (item.id == categoria.id) categoria else item
+    ];
+  }
 }
 
 final categoriasProvider =
